@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-config
+  namespace: public-subnet-2
+data:
+  REACT_APP_API_URL: "http://backend.public-subnet-1.svc.cluster.local:4000/api"

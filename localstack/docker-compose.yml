@@ -1,0 +1,23 @@
+version: '3.3'
+services:
+  localstack:
+    image: localstack/localstack:3.3.0
+    container_name: localstack
+    ports:
+      - "4566:4566"  # Edge port
+      - "4571:4571"
+    environment:
+      - SERVICES=s3,ec2,ecs,lambda,rds,cloudformation,iam,sts,cloudwatch,logs,sqs,sns,apigateway
+      - DEBUG=1
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - localstack-data:/var/lib/localstack
+    networks:
+      - localstack-net
+networks:
+  localstack-net:
+    driver: bridge
+
+volumes:
+  localstack-data:

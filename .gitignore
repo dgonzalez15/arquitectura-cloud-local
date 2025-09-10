@@ -1,0 +1,26 @@
+# Node
+node_modules/
+*.log
+
+# Build
+build/
+dist/
+.next/
+
+# Env
+.env
+.env.*
+
+# Terraform
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate*
+
+# Docker
+localstack-data/
+
+# Mac
+.DS_Store
+
+# VSCode
+.vscode/

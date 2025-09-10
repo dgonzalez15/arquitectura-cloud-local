@@ -1,0 +1,17 @@
+.featuredSection {
+  margin: 3rem 0;
+}
+.featuredTitle {
+  color: #6a4ea3;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.featuredList {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}

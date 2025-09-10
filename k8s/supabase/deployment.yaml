@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: supabase
+  namespace: public-subnet-1
+  labels:
+    app: supabase
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: supabase
+  template:
+    metadata:
+      labels:
+        app: supabase
+    spec:
+      containers:
+        - name: supabase
+          image: supabase/postgres:latest
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: supabase-config
+            - secretRef:
+                name: supabase-secrets
+          env:
+            - name: POSTGRES_PASSWORD
+              value: "supabase"
+            - name: POSTGRES_DB
+              value: "ecommerce"
+          livenessProbe:
+            tcpSocket:
+              port: 5432
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: 5432
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: supabase
+  namespace: public-subnet-1
+spec:
+  selector:
+    app: supabase
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+  type: ClusterIP
+

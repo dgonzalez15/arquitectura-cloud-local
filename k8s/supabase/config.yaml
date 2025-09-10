@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: supabase-config
+  namespace: public-subnet-1
+data:
+  POSTGRES_DB: "ecommerce"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: supabase-secrets
+  namespace: public-subnet-1
+type: Opaque
+data:
+  POSTGRES_PASSWORD: c3VwYWJhc2U=  # supabase (base64)

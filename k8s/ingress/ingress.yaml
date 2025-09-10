@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ecommerce-ingress
+  namespace: public-subnet-2
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  rules:
+    - host: ecommerce.local
+      http:
+        paths:
+          - path: /api(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: backend
+                namespace: public-subnet-1
+                port:
+                  number: 4000
+          - path: /(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend
+                namespace: public-subnet-2
+                port:
+                  number: 80

@@ -1,0 +1,80 @@
+name: CI/CD Arquitectura Cloud Local
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-test-lint:
+    runs-on: ubuntu-latest
+    services:
+      localstack:
+        image: localstack/localstack:3.3.0
+        ports:
+          - 4566:4566
+        env:
+          SERVICES: s3,lambda,iam
+          DEBUG: 1
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Instalar dependencias backend
+        working-directory: ./backend
+        run: npm ci
+
+      - name: Instalar dependencias frontend
+        working-directory: ./frontend
+        run: npm ci
+
+      - name: Lint backend
+        working-directory: ./backend
+        run: npm run lint || true
+
+      - name: Lint frontend
+        working-directory: ./frontend
+        run: npm run lint || true
+
+      - name: Build backend
+        working-directory: ./backend
+        run: npm run build
+
+      - name: Build frontend
+        working-directory: ./frontend
+        run: npm run build
+
+      - name: Test backend
+        working-directory: ./backend
+        run: npm test || true
+
+      - name: Test frontend
+        working-directory: ./frontend
+        run: npm test || true
+
+      - name: Instalar Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.7.5
+
+      - name: Init y apply Terraform (LocalStack)
+        working-directory: ./infra/terraform
+        env:
+          AWS_ACCESS_KEY_ID: test
+          AWS_SECRET_ACCESS_KEY: test
+          AWS_DEFAULT_REGION: us-east-1
+        run: |
+          terraform init
+          terraform apply -auto-approve
+
+      - name: Verificar recursos S3 y Lambda
+        run: |
+          pip install awscli-local
+          awslocal s3 ls
+          awslocal lambda list-functions

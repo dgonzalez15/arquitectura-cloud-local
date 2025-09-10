@@ -1,0 +1,79 @@
+
+.ctaLink {
+	text-decoration: none;
+}
+
+.ctaButton {
+	background: linear-gradient(90deg, #d4af37 0%, #6a4ea3 100%);
+	color: #fff;
+	border: none;
+	border-radius: 8px;
+	padding: 0.9rem 2.2rem;
+	font-size: 1.2rem;
+	font-weight: 600;
+	cursor: pointer;
+	box-shadow: 0 2px 8px rgba(106, 78, 163, 0.08);
+	transition: background 0.2s, transform 0.2s;
+	margin-top: 1rem;
+}
+.ctaButton:hover {
+	background: linear-gradient(90deg, #6a4ea3 0%, #d4af37 100%);
+	transform: translateY(-2px) scale(1.04);
+}
+.banner {
+	background: linear-gradient(90deg, #fce4ec 0%, #f8bbd0 100%);
+	color: #ad1457;
+	padding: 3rem 1rem;
+	text-align: center;
+	border-radius: 24px;
+	margin-bottom: 2rem;
+	box-shadow: 0 4px 24px rgba(248,187,208,0.10);
+	max-width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+	opacity: 0;
+	animation: fadeIn 1.2s ease 0.2s forwards;
+}
+
+@keyframes fadeIn {
+	from { opacity: 0; transform: translateY(30px); }
+	to { opacity: 1; transform: none; }
+}
+
+@media (max-width: 600px) {
+	.banner {
+		padding: 2rem 0.5rem;
+		border-radius: 12px;
+	}
+	.bannerTitle {
+		font-size: 1.5rem;
+	}
+	.bannerSubtitle {
+		font-size: 1.1rem;
+	}
+}
+
+.bannerTitle {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-bottom: 0.5rem;
+}
+
+.bannerTitle {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-bottom: 0.5rem;
+	color: #ad1457;
+}
+.bannerSubtitle {
+	font-size: 1.5rem;
+	font-weight: 400;
+	margin-bottom: 1rem;
+	color: #f06292;
+}
+.bannerText {
+	max-width: 600px;
+	margin: 0 auto 1.5rem auto;
+	font-size: 1.1rem;
+	color: #6a4ea3;
+}
