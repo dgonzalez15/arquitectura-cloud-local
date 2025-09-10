@@ -79,4 +79,11 @@
 
 ---
 
+## Nota sobre Lambda en CI/CD (GitHub Actions)
+- En GitHub Actions, LocalStack Community no puede crear funciones Lambda porque el runner no tiene Docker-in-Docker habilitado.
+- Por eso, el módulo Lambda está comentado en `infra/terraform/main.tf` para evitar errores en CI/CD.
+- Puedes descomentar el módulo Lambda para pruebas locales en tu máquina, donde Docker sí está disponible.
+
+---
+
 > Última actualización: 10/09/2025

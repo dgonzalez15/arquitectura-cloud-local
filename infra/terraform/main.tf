@@ -48,9 +48,10 @@ module "s3" {
 ##   source = "./modules/rds"
 ## }
 
-module "lambda" {
-  source = "./modules/lambda"
-}
+
+## module "lambda" {
+##   source = "./modules/lambda"
+## }
 
 
 ## module "ecs" {
