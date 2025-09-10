@@ -14,6 +14,12 @@ arquitectura-cloud-local/
 └── README.md           # Guía de onboarding y arquitectura
 ```
 
+## Arquitectura general
+
+![Arquitectura Local](./docs/arquitectura_local.png)
+
+La imagen muestra la integración de frontend, backend, nginx, LocalStack y Terraform en el entorno local, siguiendo el flujo explicado en la documentación.
+
 ## Siguiente paso
 - Se irán agregando los manifiestos, scripts y documentación en cada carpeta.
 - Consulta el README de cada subcarpeta para detalles específicos.
